@@ -3,7 +3,7 @@ const CACHE_NAME = 'flask-app-cache-v1';
 const FILES_TO_CACHE = [
   '/static/offline.html',
   '/static/css/base.css',
-  '/index',  
+  '/index',
 ];
 
 self.addEventListener('install', (evt) => {
@@ -32,10 +32,24 @@ self.addEventListener('activate', (evt) => {
   self.clients.claim();
 });
 
-self.addEventListener('fetch', function(event) {
+self.addEventListener('fetch', function (event) {
   event.respondWith(
-    caches.match(event.request).then(function(response) {
+    caches.match(event.request).then(function (response) {
       return response || fetch(event.request);
     })
   );
+});
+
+self.addEventListener('push', function(event) {
+  console.log('[Service Worker] Push Received.');
+
+  const title = 'Flask PWA';
+  const options = {
+    body: event.data.text(),
+    icon: '/static/images/icon-64.png',
+    vibrate: [50, 50, 50],
+    sound: '/static/audio/notification-sound.mp3'
+  };
+
+  event.waitUntil(self.registration.showNotification(title, options));
 });

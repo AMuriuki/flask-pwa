@@ -18,8 +18,14 @@
 
 <body>
     {% block content %}{% endblock %}
+    <button href="#" id="installButton" hidden>Install!</button>
+    <button id='push-btn'>Enable Push Notifications</button>
+    <!--Upload File from device-->
+    <input type="file" accept="image/*"/>
+    <button id="askLocation" class="btn btn-success">Request location permission</button>
     <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
     <script src="../static/js/app.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/install.js') }}"></script>
 </body>
 
 </html>
