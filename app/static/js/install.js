@@ -1,9 +1,13 @@
 'use strict';
 
 let deferredInstallPrompt = null;
-const installButton = document.getElementById('installButton');
+const installButton = document.getElementById('OtherInstallButton');
+const otherInstallButton = document.getElementById('installButton');
 if (installButton !== null) {
   installButton.addEventListener('click', installPWA);
+}
+if (otherInstallButton !== null) {
+  otherInstallButton.addEventListener('click', installPWA);
 }
 
 window.addEventListener('beforeinstallprompt', saveBeforeInstallPromptEvent);
@@ -13,12 +17,18 @@ function saveBeforeInstallPromptEvent(evt) {
   if (installButton !== null) {
     installButton.removeAttribute('hidden');
   }
+  if (otherInstallButton !== null) {
+    otherInstallButton.removeAttribute('hidden');
+  }
 }
 
 function installPWA(evt) {
   deferredInstallPrompt.prompt();
   if (installButton !== null) {
     installButton.setAttribute('hidden', true);
+  }
+  if (otherInstallButton !== null) {
+    otherInstallButton.setAttribute('hidden', true);
   }
   deferredInstallPrompt.userChoice
   .then((choice) => {
@@ -36,4 +46,3 @@ window.addEventListener('appinstalled', logAppInstalled);
 function logAppInstalled(evt) {
   console.log('App was installed.', evt);
 }
-

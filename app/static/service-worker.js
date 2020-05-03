@@ -1,8 +1,7 @@
-const CACHE_NAME = 'flask-app-cache-v1';
+const CACHE_NAME = 'flask-app-cache-v2';
 
 const FILES_TO_CACHE = [
   '/static/offline.html',
-  '/static/css/base.css',
   '/index',
 ];
 
