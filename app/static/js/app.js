@@ -13,37 +13,37 @@ if ('serviceWorker' in navigator) {
 }
 
 // Push Notifications
-// const pushButton = document.getElementById('push-btn');
-// pushButton.addEventListener('click', askPermission);
-// notificationButtonUpdate();
+const pushButton = document.getElementById('push-btn');
+pushButton.addEventListener('click', askPermission);
+notificationButtonUpdate();
 
-// if (!("Notification" in window)) {
-//     pushButton.hidden;
-// }
+if (!("Notification" in window)) {
+    pushButton.hidden;
+}
 
-// function askPermission(evt) {
-//     pushButton.disabled = true;
-//     Notification.requestPermission().then(function (permission) { notificationButtonUpdate(); });
-// }
+function askPermission(evt) {
+    pushButton.disabled = true;
+    Notification.requestPermission().then(function (permission) { notificationButtonUpdate(); });
+}
 
-// function notificationButtonUpdate() {
-//     if (Notification.permission == 'granted') {
-//         pushButton.disabled = true;
-//     } else {
-//         pushButton.disabled = false;
-//     }
-// }
+function notificationButtonUpdate() {
+    if (Notification.permission == 'granted') {
+        pushButton.disabled = true;
+    } else {
+        pushButton.disabled = false;
+    }
+}
 
 navigator.serviceWorker.ready.then(function (swRegistration) {
     return swRegistration.sync.register('example-tag');
 });
 
-// if ('geolocation' in navigator) {
-//     document.getElementById('askLocation').addEventListener('click', function () {
-//         navigator.geolocation.getCurrentPosition(function (location) {
-//             console.log(location);
-//         });
-//     });
-// } else {
-//     console.log('Geolocation API not supported.');
-// }
+if ('geolocation' in navigator) {
+    document.getElementById('askLocation').addEventListener('click', function () {
+        navigator.geolocation.getCurrentPosition(function (location) {
+            console.log(location);
+        });
+    });
+} else {
+    console.log('Geolocation API not supported.');
+}
